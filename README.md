@@ -16,12 +16,12 @@ models — a personal project, checked value by value against airGR.**
 > tracker](https://github.com/Najim33/GRsuite/issues), never to the airGR
 > maintainers.
 
-[![unofficial port](https://img.shields.io/badge/status-unofficial%20port%20of%20airGR-c2521f.svg)](NOTICE)
+[![unofficial port](https://img.shields.io/badge/status-unofficial%20port%20of%20airGR-c2521f.svg)](https://github.com/Najim33/GRsuite/blob/main/NOTICE)
 [![tests](https://github.com/Najim33/GRsuite/actions/workflows/ci.yml/badge.svg)](https://github.com/Najim33/GRsuite/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/grsuite.svg)](https://pypi.org/project/grsuite/)
 [![Python](https://img.shields.io/pypi/pyversions/grsuite.svg)](https://pypi.org/project/grsuite/)
-[![License: GPL v2](https://img.shields.io/badge/license-GPL--2.0--or--later-blue.svg)](LICENSE)
-[![validated against airGR 1.7.9](https://img.shields.io/badge/validated-airGR%201.7.9-0a7ea4.svg)](docs/VALIDATION.md)
+[![License: GPL v2](https://img.shields.io/badge/license-GPL--2.0--or--later-blue.svg)](https://github.com/Najim33/GRsuite/blob/main/LICENSE)
+[![validated against airGR 1.7.9](https://img.shields.io/badge/validated-airGR%201.7.9-0a7ea4.svg)](https://github.com/Najim33/GRsuite/blob/main/docs/VALIDATION.md)
 
 GR4J, GR5J, GR6J, GR2M, GR1A, GR4H, GR5H and the CemaNeige snow module — the models
 hydrologists have been running in R for twenty years, now in Python with no R
@@ -105,7 +105,7 @@ CI fails.
 
 | | |
 |---|---|
-| **Same numbers** | 502 quantities compared value by value against airGR — [every internal variable](docs/VALIDATION.md#the-internal-state-variable-by-variable), not just discharge |
+| **Same numbers** | 502 quantities compared value by value against airGR — [every internal variable](https://github.com/Najim33/GRsuite/blob/main/docs/VALIDATION.md#the-internal-state-variable-by-variable), not just discharge |
 | **Same calibration** | Michel's algorithm reproduced step for step — identical iteration counts on 500 calibrations |
 | **No R needed** | pure Python + NumPy, JIT-compiled with Numba |
 | **Faster** | 3.2× quicker than airGR on the same 500 calibrations |
@@ -129,7 +129,7 @@ CI fails.
 | Calibration | Michel's algorithm (grid screening then steepest descent) | Michel (1991) |
 | Utilities | time-series aggregation, semi-distributed routing, interception capacity | Lobligeois (2014); Ficchì et al. (2019) |
 
-Full bibliographic entries, with DOIs, are in **[docs/REFERENCES.md](docs/REFERENCES.md)**.
+Full bibliographic entries, with DOIs, are in **[docs/REFERENCES.md](https://github.com/Najim33/GRsuite/blob/main/docs/REFERENCES.md)**.
 
 `CreateErrorCrit_GAPX` (de Lavenne et al., 2019) and airGR's plotting helpers are
 the only pieces left out. GR6H does not exist in airGR 1.7.9, so it does not
@@ -139,23 +139,23 @@ exist here either.
 
 ## Validation
 
-![Measured agreement against the 5 % requirement](docs/assets/deviation_scale.svg)
+![Measured agreement against the 5 % requirement](https://raw.githubusercontent.com/Najim33/GRsuite/main/docs/assets/deviation_scale.png)
 
 The brief was to stay within 5 %. The measured agreement is eleven orders of
 magnitude better than that, and sits at the precision limit of the reference files
 themselves.
 
-![500 calibrations](docs/assets/deviation_histogram.svg)
+![500 calibrations](https://raw.githubusercontent.com/Najim33/GRsuite/main/docs/assets/deviation_histogram.png)
 
 Across 500 independent calibrations — five model configurations on 100 CAMELS-FR
 catchments — 34 parameter sets came out *bit-identical* to airGR's, and the rest
 differ only in the last significant digit of a double.
 
-**[Read the full validation report →](docs/VALIDATION.md)**
+**[Read the full validation report →](https://github.com/Najim33/GRsuite/blob/main/docs/VALIDATION.md)**
 
 Two implementation details decide whether a re-implementation of airGR is merely
 correct or actually identical. Both are documented in
-**[docs/FIDELITY.md](docs/FIDELITY.md)**; the short version is that airGR's Fortran
+**[docs/FIDELITY.md](https://github.com/Najim33/GRsuite/blob/main/docs/FIDELITY.md)**; the short version is that airGR's Fortran
 evaluates `0.9` in single precision before promoting it, and that its automatic
 warm-up period carries a leap-year correction. Miss either and your discharge is
 off by 2.4 × 10⁻⁷ or 3 × 10⁻⁶ respectively.
@@ -182,7 +182,7 @@ result = gr.calibration_michel(inputs, options, crit, gr.CalibOptions("GR4J"))
 ```
 
 The mapping from every airGR function to its GRsuite counterpart is in
-**[docs/MIGRATING_FROM_AIRGR.md](docs/MIGRATING_FROM_AIRGR.md)**.
+**[docs/MIGRATING_FROM_AIRGR.md](https://github.com/Najim33/GRsuite/blob/main/docs/MIGRATING_FROM_AIRGR.md)**.
 
 ---
 
@@ -190,14 +190,14 @@ The mapping from every airGR function to its GRsuite counterpart is in
 
 | File | What it shows |
 |---|---|
-| [`examples/01_simulate.py`](examples/01_simulate.py) | Run GR4J with known parameters, inspect the internal fluxes |
-| [`examples/02_calibrate.py`](examples/02_calibrate.py) | Calibrate, then validate on an independent period |
-| [`examples/03_compare_models.py`](examples/03_compare_models.py) | GR4J vs GR5J vs GR6J on the same catchment |
-| [`examples/04_snow.py`](examples/04_snow.py) | CemaNeige on elevation bands, snow pack dynamics |
-| [`examples/05_hourly.py`](examples/05_hourly.py) | GR4H and GR5H with an interception store |
-| [`examples/06_low_flows.py`](examples/06_low_flows.py) | Objective functions for low-flow performance |
-| [`examples/07_semi_distributed.py`](examples/07_semi_distributed.py) | Routing upstream sub-catchments to an outlet |
-| [`examples/08_from_csv.py`](examples/08_from_csv.py) | Going from a plain CSV to a calibrated model |
+| [`examples/01_simulate.py`](https://github.com/Najim33/GRsuite/blob/main/examples/01_simulate.py) | Run GR4J with known parameters, inspect the internal fluxes |
+| [`examples/02_calibrate.py`](https://github.com/Najim33/GRsuite/blob/main/examples/02_calibrate.py) | Calibrate, then validate on an independent period |
+| [`examples/03_compare_models.py`](https://github.com/Najim33/GRsuite/blob/main/examples/03_compare_models.py) | GR4J vs GR5J vs GR6J on the same catchment |
+| [`examples/04_snow.py`](https://github.com/Najim33/GRsuite/blob/main/examples/04_snow.py) | CemaNeige on elevation bands, snow pack dynamics |
+| [`examples/05_hourly.py`](https://github.com/Najim33/GRsuite/blob/main/examples/05_hourly.py) | GR4H and GR5H with an interception store |
+| [`examples/06_low_flows.py`](https://github.com/Najim33/GRsuite/blob/main/examples/06_low_flows.py) | Objective functions for low-flow performance |
+| [`examples/07_semi_distributed.py`](https://github.com/Najim33/GRsuite/blob/main/examples/07_semi_distributed.py) | Routing upstream sub-catchments to an outlet |
+| [`examples/08_from_csv.py`](https://github.com/Najim33/GRsuite/blob/main/examples/08_from_csv.py) | Going from a plain CSV to a calibrated model |
 
 All of them run against the demonstration catchment shipped in `tests/data`, so
 they work straight after a clone.
@@ -260,10 +260,10 @@ INRAE. If GRsuite supports published work, cite **airGR**:
 
 **and the model you actually ran** — GR4J is Perrin et al. (2003), CemaNeige is
 Valéry (2010), and so on. Every one of them, with its DOI, is listed in
-**[docs/REFERENCES.md](docs/REFERENCES.md)**.
+**[docs/REFERENCES.md](https://github.com/Najim33/GRsuite/blob/main/docs/REFERENCES.md)**.
 
 If the port itself is relevant to your methods, cite this repository too — see
-[CITATION.cff](CITATION.cff).
+[CITATION.cff](https://github.com/Najim33/GRsuite/blob/main/CITATION.cff).
 
 ---
 
@@ -271,16 +271,16 @@ If the port itself is relevant to your methods, cite this repository too — see
 
 Bug reports, models, criteria and examples are all welcome. The one hard rule:
 **anything that changes model numerics must keep the airGR comparison tests
-green.** See [CONTRIBUTING.md](CONTRIBUTING.md).
+green.** See [CONTRIBUTING.md](https://github.com/Najim33/GRsuite/blob/main/CONTRIBUTING.md).
 
 ---
 
 ## Licence
 
 GPL-2.0-or-later. GRsuite is a derivative work of airGR (INRAE, GPL-2) and
-carries the same licence — see [NOTICE](NOTICE) for the full attribution.
+carries the same licence — see [NOTICE](https://github.com/Najim33/GRsuite/blob/main/NOTICE) for the full attribution.
 
 GRsuite is an independent, unofficial project. It is not produced, endorsed or
 supported by INRAE, and it is not a release of airGR.
 
-*Ce README existe aussi [en français](README.fr.md).*
+*Ce README existe aussi [en français](https://github.com/Najim33/GRsuite/blob/main/README.fr.md).*
