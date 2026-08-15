@@ -1,0 +1,13 @@
+# Normalise les fins de ligne : LF dans le depot, natif dans la copie de travail.
+* text=auto
+
+*.py    text diff=python
+*.md    text
+*.toml  text
+*.cff   text
+*.yml   text
+*.csv   text
+
+# Donnees de reference : ne jamais toucher au contenu.
+*.gz    binary
+*.png   binary

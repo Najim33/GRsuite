@@ -1,0 +1,203 @@
+cff-version: 1.2.0
+title: "GRsuite: the airGR suite of GR rainfall-runoff models, in Python"
+message: >-
+  If you use this software, please cite it using these metadata — and cite
+  airGR, which GRsuite reimplements, together with the reference of the model
+  you actually ran (see docs/REFERENCES.md).
+type: software
+authors:
+  - family-names: Bouhafa
+    given-names: Najim
+    email: najimbouhafa@gmail.com
+license: GPL-2.0-or-later
+version: 1.0.0
+date-released: "2026-08-15"
+repository-code: "https://github.com/Najim33/GRsuite"
+abstract: >-
+  A Python implementation of the GR suite of lumped rainfall-runoff models
+  (GR1A, GR2M, GR4J, GR5J, GR6J, GR4H, GR5H) and of the CemaNeige snow module,
+  translated from the R package airGR 1.7.9 and validated against it.
+  GRsuite originates no new hydrology: every model, criterion and algorithm is
+  the work of the authors cited below.
+keywords:
+  - hydrology
+  - rainfall-runoff
+  - GR4J
+  - CemaNeige
+  - airGR
+  - streamflow
+  - calibration
+references:
+  - type: article
+    title: "The suite of lumped GR hydrological models in an R package"
+    authors:
+      - family-names: Coron
+        given-names: Laurent
+      - family-names: Thirel
+        given-names: Guillaume
+      - family-names: Delaigue
+        given-names: Olivier
+      - family-names: Perrin
+        given-names: Charles
+      - family-names: Andréassian
+        given-names: Vazken
+    journal: "Environmental Modelling & Software"
+    volume: 94
+    pages: "166-171"
+    year: 2017
+    doi: "10.1016/j.envsoft.2017.05.002"
+    notes: "The reference implementation that GRsuite reimplements."
+
+  - type: software
+    title: "airGR: Suite of GR Hydrological Models for Precipitation-Runoff Modelling"
+    authors:
+      - family-names: Coron
+        given-names: Laurent
+      - family-names: Delaigue
+        given-names: Olivier
+      - family-names: Thirel
+        given-names: Guillaume
+      - family-names: Dorchies
+        given-names: David
+      - family-names: Perrin
+        given-names: Charles
+      - family-names: Michel
+        given-names: Claude
+    version: "1.7.9"
+    doi: "10.15454/EX11NA"
+    url: "https://cran.r-project.org/package=airGR"
+    notes: "INRAE, HYCAR Research Unit, Antony, France. GPL-2."
+
+  - type: article
+    title: "Improvement of a parsimonious model for streamflow simulation"
+    authors:
+      - family-names: Perrin
+        given-names: Charles
+      - family-names: Michel
+        given-names: Claude
+      - family-names: Andréassian
+        given-names: Vazken
+    journal: "Journal of Hydrology"
+    volume: 279
+    pages: "275-289"
+    year: 2003
+    doi: "10.1016/S0022-1694(03)00225-7"
+    notes: "GR4J."
+
+  - type: article
+    title: >-
+      A downward structural sensitivity analysis of hydrological models to
+      improve low-flow simulation
+    authors:
+      - family-names: Pushpalatha
+        given-names: Raji
+      - family-names: Perrin
+        given-names: Charles
+      - family-names: Le Moine
+        given-names: Nicolas
+      - family-names: Mathevet
+        given-names: Thibault
+      - family-names: Andréassian
+        given-names: Vazken
+    journal: "Journal of Hydrology"
+    volume: 411
+    pages: "66-76"
+    year: 2011
+    doi: "10.1016/j.jhydrol.2011.09.034"
+    notes: "GR6J, and GR5J."
+
+  - type: article
+    title: >-
+      Hydrological modelling at multiple sub-daily time steps: model improvement
+      via flux-matching
+    authors:
+      - family-names: Ficchì
+        given-names: Andrea
+      - family-names: Perrin
+        given-names: Charles
+      - family-names: Andréassian
+        given-names: Vazken
+    journal: "Journal of Hydrology"
+    volume: 575
+    pages: "1308-1327"
+    year: 2019
+    doi: "10.1016/j.jhydrol.2019.05.084"
+    notes: "GR5H and its interception store."
+
+  - type: article
+    title: >-
+      Stepwise development of a two-parameter monthly water balance model
+    authors:
+      - family-names: Mouelhi
+        given-names: Safouane
+      - family-names: Michel
+        given-names: Claude
+      - family-names: Perrin
+        given-names: Charles
+      - family-names: Andréassian
+        given-names: Vazken
+    journal: "Journal of Hydrology"
+    volume: 318
+    pages: "200-214"
+    year: 2006
+    doi: "10.1016/j.jhydrol.2005.06.014"
+    notes: "GR2M."
+
+  - type: thesis
+    title: >-
+      Modélisation précipitations – débit sous influence nivale. Élaboration
+      d'un module neige et évaluation sur 380 bassins versants
+    authors:
+      - family-names: Valéry
+        given-names: Audrey
+    institution:
+      name: "AgroParisTech / Cemagref, Antony"
+    thesis-type: "PhD thesis"
+    year: 2010
+    notes: "CemaNeige snow module and elevation-band extrapolation."
+
+  - type: article
+    title: >-
+      Revisiting a simple degree-day model for integrating satellite data:
+      implementation of SWE-SCA hystereses
+    authors:
+      - family-names: Riboust
+        given-names: Philippe
+      - family-names: Thirel
+        given-names: Guillaume
+      - family-names: Le Moine
+        given-names: Nicolas
+      - family-names: Ribstein
+        given-names: Pierre
+    journal: "Journal of Hydrology and Hydromechanics"
+    volume: 67
+    pages: "70-81"
+    year: 2019
+    doi: "10.2478/johh-2018-0004"
+    notes: "CemaNeige linear hysteresis."
+
+  - type: article
+    title: >-
+      Which potential evapotranspiration input for a lumped rainfall-runoff
+      model? Part 2
+    authors:
+      - family-names: Oudin
+        given-names: Ludovic
+      - family-names: Hervieu
+        given-names: Frédéric
+      - family-names: Michel
+        given-names: Claude
+      - family-names: Perrin
+        given-names: Charles
+      - family-names: Andréassian
+        given-names: Vazken
+      - family-names: Anctil
+        given-names: François
+      - family-names: Loumagne
+        given-names: Cécile
+    journal: "Journal of Hydrology"
+    volume: 303
+    pages: "290-306"
+    year: 2005
+    doi: "10.1016/j.jhydrol.2004.08.026"
+    notes: "Potential evapotranspiration."

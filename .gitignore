@@ -1,0 +1,32 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[co]
+*.nbi
+*.nbc
+
+# Packaging
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Tools
+.ruff_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
