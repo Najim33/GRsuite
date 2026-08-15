@@ -4,9 +4,11 @@ Every model, module, criterion and algorithm in GRsuite comes from published wor
 This page lists the source of each one, so that a result produced with GRsuite can
 be traced back to the paper or thesis that defines it.
 
-GRsuite itself introduces no new hydrology: it is a Python translation of
-**airGR** (INRAE, HYCAR), which is the reference implementation of all of the
-below. Work published with GRsuite should cite the model reference *and* airGR.
+GRsuite itself introduces no new hydrology: it is an unofficial, independent
+Python translation of **airGR** (INRAE, HYCAR), which is the reference
+implementation of all of the below. GRsuite is a personal project and is not
+endorsed by INRAE. Work published with GRsuite should cite the model reference
+*and* airGR — not GRsuite alone.
 
 *Cette page existe en un seul exemplaire : une bibliographie est la même dans les
 deux langues. Le README français y renvoie directement.*

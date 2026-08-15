@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "grsuite"
 version = "1.0.0"
-description = "The airGR suite of GR rainfall-runoff models in Python, validated bit-for-bit against airGR"
+description = "Unofficial, independent Python port of the airGR suite of GR rainfall-runoff models, validated against airGR"
 readme = "README.md"
 requires-python = ">=3.9"
 license = "GPL-2.0-or-later"

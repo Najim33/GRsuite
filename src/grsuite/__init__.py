@@ -1,5 +1,10 @@
 """GRsuite - suite de modeles hydrologiques GR en Python.
 
+Projet personnel et NON OFFICIEL : GRsuite n'est ni produit, ni approuve, ni
+maintenu par l'INRAE, et n'est pas une version d'airGR. Les modeles et
+l'implementation de reference sont ceux de l'unite HYCAR de l'INRAE (voir
+NOTICE et docs/REFERENCES.md) ; seule la traduction en Python est de l'auteur.
+
 Reimplementation complete du package R airGR 1.7.9 (INRAE, HYCAR) :
 modeles GR1A, GR2M, GR4J, GR5J, GR6J, module de neige CemaNeige (avec
 ou sans hysteresis), ETP d'Oudin, criteres d'erreur et calage par la

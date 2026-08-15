@@ -1,7 +1,22 @@
 # GRsuite
 
-**The airGR suite of GR rainfall-runoff models, in Python — validated bit-for-bit against airGR.**
+**An unofficial, independent Python port of the airGR suite of GR rainfall-runoff
+models — a personal project, checked value by value against airGR.**
 
+> **This is not an official package, and it is not airGR.** GRsuite is one
+> person's work, developed independently and on personal time. It is not
+> produced, endorsed, reviewed or supported by INRAE, and it carries no
+> institutional guarantee. The models, the science and the reference
+> implementation belong to INRAE's HYCAR unit; what is mine is the translation
+> into Python and the mistakes in it.
+>
+> If your work needs the reference implementation, use
+> **[airGR](https://cran.r-project.org/package=airGR)** — and please report
+> problems found here to [this repository's issue
+> tracker](https://github.com/Najim33/GRsuite/issues), never to the airGR
+> maintainers.
+
+[![unofficial port](https://img.shields.io/badge/status-unofficial%20port%20of%20airGR-c2521f.svg)](NOTICE)
 [![tests](https://github.com/Najim33/GRsuite/actions/workflows/ci.yml/badge.svg)](https://github.com/Najim33/GRsuite/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/grsuite.svg)](https://pypi.org/project/grsuite/)
 [![Python](https://img.shields.io/pypi/pyversions/grsuite.svg)](https://pypi.org/project/grsuite/)
@@ -265,6 +280,7 @@ green.** See [CONTRIBUTING.md](CONTRIBUTING.md).
 GPL-2.0-or-later. GRsuite is a derivative work of airGR (INRAE, GPL-2) and
 carries the same licence — see [NOTICE](NOTICE) for the full attribution.
 
-GRsuite is an independent project and is not endorsed by INRAE.
+GRsuite is an independent, unofficial project. It is not produced, endorsed or
+supported by INRAE, and it is not a release of airGR.
 
 *Ce README existe aussi [en français](README.fr.md).*

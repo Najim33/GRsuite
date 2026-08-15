@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: "GRsuite: the airGR suite of GR rainfall-runoff models, in Python"
+title: "GRsuite: an unofficial Python port of the airGR suite of GR rainfall-runoff models"
 message: >-
   If you use this software, please cite it using these metadata — and cite
   airGR, which GRsuite reimplements, together with the reference of the model
@@ -14,11 +14,13 @@ version: 1.0.0
 date-released: "2026-08-15"
 repository-code: "https://github.com/Najim33/GRsuite"
 abstract: >-
-  A Python implementation of the GR suite of lumped rainfall-runoff models
+  An unofficial, independent Python implementation of the GR suite of lumped
+  rainfall-runoff models
   (GR1A, GR2M, GR4J, GR5J, GR6J, GR4H, GR5H) and of the CemaNeige snow module,
   translated from the R package airGR 1.7.9 and validated against it.
-  GRsuite originates no new hydrology: every model, criterion and algorithm is
-  the work of the authors cited below.
+  GRsuite is a personal project, not produced or endorsed by INRAE, and not a
+  release of airGR. It originates no new hydrology: every model, criterion and
+  algorithm is the work of the authors cited below.
 keywords:
   - hydrology
   - rainfall-runoff

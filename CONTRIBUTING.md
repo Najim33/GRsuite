@@ -2,6 +2,10 @@
 
 Bug reports, models, criteria and examples are all welcome.
 
+GRsuite is an unofficial, personal port of airGR, maintained on personal time and
+with no institutional backing. Expect the review pace of a one-person project —
+and please never route a GRsuite problem to the airGR maintainers.
+
 ## The one hard rule
 
 **Anything that changes model numerics must keep the airGR comparison tests

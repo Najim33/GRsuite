@@ -1,8 +1,10 @@
 # Migrating from airGR to GRsuite
 
-GRsuite is a function-by-function translation of airGR 1.7.9. This page maps every
-airGR function to its GRsuite counterpart and lists the (few) differences you need
-to know when porting an R script.
+GRsuite is a function-by-function translation of airGR 1.7.9 — an unofficial one,
+written independently of INRAE. This page maps every airGR function to its GRsuite
+counterpart and lists the (few) differences you need to know when porting an R
+script. Porting away from airGR means leaving the reference implementation behind;
+that is a decision worth making deliberately.
 
 The short version: take your R workflow, lowercase the function names, convert
 your indices from 1-based to 0-based, and you get the same numbers.

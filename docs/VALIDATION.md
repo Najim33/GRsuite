@@ -2,6 +2,12 @@
 
 **GRsuite 1.0.0 against airGR 1.7.9**
 
+> GRsuite is an unofficial, independent port of airGR, written and validated by
+> one person. This report is that person's own work, not an INRAE evaluation of
+> it: it says what was measured and how, so that a reader can check the claims
+> instead of taking them on trust. The reference implementation remains
+> [airGR](https://cran.r-project.org/package=airGR).
+
 GRsuite is a re-implementation, so the only claim that matters is whether it
 produces the same numbers as the package it re-implements. This report states what
 was compared, how, and what came out.

@@ -5,6 +5,11 @@ title: ""
 labels: bug
 ---
 
+<!-- GRsuite is an unofficial, personal port of airGR. It is not maintained by
+     INRAE: report the problem here, not to the airGR maintainers. If you can
+     reproduce the same behaviour in airGR itself, then it is not a GRsuite bug
+     and belongs upstream. -->
+
 **What happened**
 
 <!-- What did GRsuite do? What did you expect instead? -->

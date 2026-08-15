@@ -1,7 +1,23 @@
 # GRsuite
 
-**La suite des modèles pluie-débit GR d'airGR, en Python — validée au bit près contre airGR.**
+**Un portage Python indépendant et non officiel de la suite de modèles
+pluie-débit GR d'airGR — un projet personnel, vérifié valeur par valeur contre
+airGR.**
 
+> **Ce package n'est pas officiel, et ce n'est pas airGR.** GRsuite est le
+> travail d'une seule personne, mené de façon indépendante et sur son temps
+> personnel. Il n'est ni produit, ni approuvé, ni relu, ni maintenu par l'INRAE,
+> et n'offre aucune garantie institutionnelle. Les modèles, la science et
+> l'implémentation de référence appartiennent à l'unité HYCAR de l'INRAE ; ce qui
+> est de moi, c'est la traduction en Python et les erreurs qu'elle contient.
+>
+> Si votre travail exige l'implémentation de référence, utilisez
+> **[airGR](https://cran.r-project.org/package=airGR)** — et signalez les
+> problèmes rencontrés ici sur [le suivi d'incidents de ce
+> dépôt](https://github.com/Najim33/GRsuite/issues), jamais aux mainteneurs
+> d'airGR.
+
+[![unofficial port](https://img.shields.io/badge/status-unofficial%20port%20of%20airGR-c2521f.svg)](NOTICE)
 [![tests](https://github.com/Najim33/GRsuite/actions/workflows/ci.yml/badge.svg)](https://github.com/Najim33/GRsuite/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/grsuite.svg)](https://pypi.org/project/grsuite/)
 [![Python](https://img.shields.io/pypi/pyversions/grsuite.svg)](https://pypi.org/project/grsuite/)
@@ -269,6 +285,7 @@ tests de comparaison airGR au vert.** Voir [CONTRIBUTING.md](CONTRIBUTING.md).
 GPL-2.0-or-later. GRsuite est une œuvre dérivée d'airGR (INRAE, GPL-2) et porte la
 même licence — voir [NOTICE](NOTICE) pour l'attribution complète.
 
-GRsuite est un projet indépendant et n'est pas approuvé par l'INRAE.
+GRsuite est un projet indépendant et non officiel. Il n'est ni produit, ni
+approuvé, ni maintenu par l'INRAE, et n'est pas une version d'airGR.
 
 *This README is also available [in English](README.md).*
