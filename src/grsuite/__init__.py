@@ -22,10 +22,17 @@ Exemple minimal
 (366,)
 """
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 from .aggreg import series_aggreg
-from .api import CalibratedModel, Catchment, Simulation, list_models, param_names
+from .api import (
+    Assimilation,
+    CalibratedModel,
+    Catchment,
+    Simulation,
+    list_models,
+    param_names,
+)
 from .calib import OutputsCalib, calibration_michel
 from .core import (
     CEMANEIGE_OUTPUTS,
@@ -43,6 +50,7 @@ from .crit import (
     error_crit_nse,
     error_crit_rmse,
 )
+from .da import run_model_da
 from .models import (
     MODEL_FUNCS,
     data_alti_extrapolation_valery,
@@ -64,12 +72,16 @@ from .models import (
     run_model_gr5j,
     run_model_gr6j,
 )
+from .perturb import InputsPert
 from .sd import InputsModelSD, run_model_lag
 from .transfo import transfo_param
 
 __all__ = [
     # interface haut niveau
-    "Catchment", "Simulation", "CalibratedModel", "list_models", "param_names",
+    "Catchment", "Simulation", "CalibratedModel", "Assimilation",
+    "list_models", "param_names",
+    # assimilation de donnees
+    "InputsPert", "run_model_da",
     # interface fidele a airGR
     "InputsModel", "RunOptions", "CalibOptions",
     "InputsCrit", "InputsCritCompo", "error_crit",

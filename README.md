@@ -127,6 +127,7 @@ CI fails.
 | Criteria | NSE, KGE, KGE′, RMSE, weighted composites | Nash & Sutcliffe (1970); Gupta et al. (2009); Kling et al. (2012) |
 | Transformations | `sqrt`, `log`, `inv`, `sort`, `boxcox`, powers | Santos et al. (2018) |
 | Calibration | Michel's algorithm (grid screening then steepest descent) | Michel (1991) |
+| Data assimilation | EnKF and particle filter state updating, perturbed forcing ensembles | Piazzi et al. (2021); airGRdatassim 0.1.4 |
 | Utilities | time-series aggregation, semi-distributed routing, interception capacity | Lobligeois (2014); Ficchì et al. (2019) |
 
 Full bibliographic entries, with DOIs, are in **[docs/REFERENCES.md](https://github.com/Najim33/GRsuite/blob/main/docs/REFERENCES.md)**.
@@ -198,6 +199,7 @@ The mapping from every airGR function to its GRsuite counterpart is in
 | [`examples/06_low_flows.py`](https://github.com/Najim33/GRsuite/blob/main/examples/06_low_flows.py) | Objective functions for low-flow performance |
 | [`examples/07_semi_distributed.py`](https://github.com/Najim33/GRsuite/blob/main/examples/07_semi_distributed.py) | Routing upstream sub-catchments to an outlet |
 | [`examples/08_from_csv.py`](https://github.com/Najim33/GRsuite/blob/main/examples/08_from_csv.py) | Going from a plain CSV to a calibrated model |
+| [`examples/09_data_assimilation.py`](https://github.com/Najim33/GRsuite/blob/main/examples/09_data_assimilation.py) | EnKF and particle filter assimilation on a calibrated GR4J |
 
 All of them run against the demonstration catchment shipped in `tests/data`, so
 they work straight after a clone.

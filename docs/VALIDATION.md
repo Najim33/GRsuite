@@ -572,7 +572,65 @@ are the recorded output of the campaign.
 
 ---
 
-## 9. References
+## 9. Data assimilation (airGRdatassim)
+
+The assimilation component extends the same chain of trust to a second
+reference package: **airGRdatassim 0.1.4** (INRAE, GPL-2). The method is the
+same as everywhere else in this report — R produces the numbers, GRsuite
+must reproduce them — with one extra ingredient, because assimilation is
+stochastic.
+
+### 9.1 How a stochastic reference is compared exactly
+
+R's random draws (Mersenne-Twister with inversion normals) cannot be
+reproduced bit-for-bit by NumPy. So the reference run *exports its own
+draws*: `tools/oracle/da_instrumented.R` holds verbatim copies of the four
+airGRdatassim 0.1.4 functions, modified only to log every `rnorm`/`runif`
+call in order (the file's header lists every modification). The test suite
+then replays the exported draws through GRsuite and checks two things: the
+outputs agree value by value (the usual 1e-9 tolerance), and **every**
+exported draw is consumed, in the same order — a divergence in the sequence
+of random calls fails the test even if the numbers happen to match.
+
+`tools/oracle/export_da_fixtures.R` writes the reference files
+(`tests/data/da_*.csv.gz`, 56 files): nine configurations covering
+`CreateInputsPert` (GR4J and CemaNeigeGR4J), the EnKF (GR4J with state
+perturbation, GR5J without UH1 and without perturbation, GR6J,
+CemaNeigeGR4J), the particle filter (GR4J, CemaNeigeGR6J), the open loop,
+and one full run with perturbed meteorology. For each, the ensemble
+discharge, the background and analysis state cubes, the perturbed
+observations (EnKF) and the perturbed forcing ensembles are compared, plus
+the draws themselves.
+
+The script also cross-checks the instrumented copies against the official
+`airGRdatassim` package where both must agree: `CreateInputsPert` and the
+particle filter come out identical to the official package, draw for draw.
+
+### 9.2 The one deliberate deviation: the EnKF fix
+
+airGRdatassim 0.1.4 has a bug, and it is stated here so that nobody
+"discovers" it later in a diff. In `DA_EnKF`, the state variables to update
+are selected with `IndDa <- which(StateEnKF == 1)`. But `RunModel_DA`
+passes `StateEnKF` as a character vector — `c("Prod", "Rout")`, the
+documented usage — so the comparison is always false, the selection is
+empty and the Kalman update never runs. **The EnKF of the official package
+is a silent no-op** (verified empirically: `EnsStateA == EnsStateBkg` end
+to end, 0 difference).
+
+GRsuite implements the *documented* behaviour: the names in `state_enkf`
+select the variables to update (the numeric-indicator branch is preserved).
+The instrumented copies in `tools/oracle/da_instrumented.R` carry the same
+one-line fix, clearly marked, so the reference files validate the behaviour
+GRsuite actually ships. The practical consequence for users porting an R
+workflow: an EnKF that "ran" under airGRdatassim 0.1.4 did nothing, and
+GRsuite will show it — the assimilation here genuinely moves the states
+(and, on the demonstration catchment, lifts the ensemble-median NSE from
+0.64 open-loop to 0.90). The particle filter and `CreateInputsPert` are
+unaffected and match the official package exactly.
+
+---
+
+## 10. References
 
 The models, criteria, calibration algorithm and dataset named in this report are
 cited in full — with DOIs — in **[REFERENCES.md](REFERENCES.md)**. The ones this

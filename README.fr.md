@@ -130,6 +130,7 @@ divergent un jour, la CI échoue.
 | Critères | NSE, KGE, KGE′, RMSE, composites pondérés | Nash & Sutcliffe (1970) ; Gupta et al. (2009) ; Kling et al. (2012) |
 | Transformations | `sqrt`, `log`, `inv`, `sort`, `boxcox`, puissances | Santos et al. (2018) |
 | Calage | algorithme de Michel (criblage de grille puis plus forte pente) | Michel (1991) |
+| Assimilation de données | mise à jour d'états par EnKF et filtre particulaire, ensembles de forcages perturbés | Piazzi et al. (2021) ; airGRdatassim 0.1.4 |
 | Utilitaires | agrégation de séries temporelles, routage semi-distribué, capacité d'interception | Lobligeois (2014) ; Ficchì et al. (2019) |
 
 Les références bibliographiques complètes, avec leurs DOI, sont dans
@@ -203,6 +204,7 @@ La correspondance de chaque fonction airGR vers son équivalent GRsuite est dans
 | [`examples/06_low_flows.py`](examples/06_low_flows.py) | Fonctions objectif pour la performance en étiage |
 | [`examples/07_semi_distributed.py`](examples/07_semi_distributed.py) | Routage de sous-bassins amont vers un exutoire |
 | [`examples/08_from_csv.py`](examples/08_from_csv.py) | Partir d'un simple CSV et arriver à un modèle calé |
+| [`examples/09_data_assimilation.py`](examples/09_data_assimilation.py) | Assimilation par EnKF et filtre particulaire sur un GR4J calé |
 
 Tous tournent sur le bassin de démonstration livré dans `tests/data`, donc ils
 fonctionnent directement après un clone.

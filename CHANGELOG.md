@@ -5,6 +5,24 @@ All notable changes to GRsuite are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-08-19
+
+### Added
+
+- Data assimilation for the daily models (GR4J, GR5J, GR6J, with or without
+  CemaNeige), ported from airGRdatassim 0.1.4: perturbed forcing ensembles
+  (`InputsPert`), the ensemble Kalman filter and the particle filter
+  (`run_model_da`), a high-level `Catchment.assimilate()` wrapper and
+  `examples/09_data_assimilation.py`. Validated value by value against R
+  reference outputs (`tools/oracle/export_da_fixtures.R`), with the
+  reference's own random draws replayed exactly.
+- One deliberate deviation from airGRdatassim 0.1.4, documented in
+  docs/VALIDATION.md section 9: the official package's EnKF is a silent
+  no-op with the documented character `StateEnKF` (`which(StateEnKF == 1)`
+  selects nothing, so the Kalman update never runs). GRsuite implements the
+  documented behaviour — the names in `state_enkf` select the state
+  variables to update.
+
 ## [1.0.0] - 2026-08-15
 
 First public release.

@@ -40,6 +40,25 @@ your indices from 1-based to 0-based, and you get the same numbers.
 | `CreateErrorCrit_GAPX` | not ported |
 | `plot_OutputsModel`, `plot_OutputsCalib` | not ported (use `Simulation.plot()`) |
 
+## Data assimilation (airGRdatassim)
+
+| airGRdatassim (R) | GRsuite (Python) |
+|---|---|
+| `CreateInputsPert(FUN_MOD, DatesR, Precip, PotEvap, ..., NbMbr, Seed)` | `InputsPert(model, dates, precip=..., pot_evap=..., nb_mbr=..., seed=...)` |
+| `RunModel_DA(InputsModel, InputsPert, Qobs, IndRun, FUN_MOD, Param, DaMethod, NbMbr, StateEnKF, StatePert, Seed)` | `run_model_da(inputs_model, ind_run, model, param, inputs_pert=..., qobs=..., da_method=..., nb_mbr=..., state_enkf=..., state_pert=..., seed=...)` |
+| `plot(OutputsModelDA)` | `Assimilation.plot()` (high level: `Catchment.assimilate()`) |
+
+One deliberate difference to know about: **airGRdatassim 0.1.4's EnKF never
+updates any state.** `DA_EnKF` selects the variables to update with
+`which(StateEnKF == 1)`, but `RunModel_DA` passes `StateEnKF` as a character
+vector (the documented `c("Prod", "Rout", ...)`), so the selection is always
+empty and the Kalman update is a silent no-op. GRsuite implements the
+documented behaviour: the names in `state_enkf` select the variables to
+update. An EnKF ported from R therefore gives *different* results here —
+different because it actually assimilates. The particle filter and
+`CreateInputsPert` are unaffected and agree with the R package value by
+value. See [VALIDATION.md section 9](VALIDATION.md#92-the-one-deliberate-deviation-the-enkf-fix).
+
 ## Differences to know about
 
 - **Indexing.** R is 1-based, GRsuite is 0-based. `IndPeriod_Run = 365:730` in R

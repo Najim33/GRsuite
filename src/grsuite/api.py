@@ -22,9 +22,12 @@ import numpy as np
 from .calib import calibration_michel
 from .core import CalibOptions, InputsModel, RunOptions
 from .crit import CRIT_FUNCS, InputsCrit, InputsCritCompo, error_crit
+from .da import _state_names, run_model_da
 from .models import MODEL_FUNCS, data_alti_extrapolation_valery, run_model
+from .perturb import DA_MODELS, InputsPert
 
-__all__ = ["Catchment", "Simulation", "CalibratedModel", "list_models"]
+__all__ = ["Catchment", "Simulation", "CalibratedModel", "Assimilation",
+           "list_models"]
 
 SNOW_MODELS = {"CemaNeigeGR4J", "CemaNeigeGR5J", "CemaNeigeGR6J",
                "CemaNeigeGR4H", "CemaNeigeGR5H"}
@@ -345,6 +348,76 @@ class Catchment:
         fit = self.calibrate(model, period=calibration, **kwargs)
         return fit, fit.evaluate(period=validation)
 
+    def assimilate(self, model, params, method="EnKF", period=None,
+                   nb_mbr=50, state_enkf=None, state_pert=None,
+                   perturb=False, seed=None):
+        """Assimilate the observed discharge, step by step.
+
+        Sequential data assimilation as in airGRdatassim: at every observed
+        time step, the ensemble states (production store, routing store,
+        unit hydrograph levels) are corrected towards the observation, then
+        the model restarts from the corrected states. Note that there is no
+        warm-up: the first step starts from the default fill levels,
+        identical for every member, and the assimilation itself pulls the
+        ensemble towards the observations.
+
+        Parameters
+        ----------
+        model : str
+            ``"GR4J"``, ``"GR5J"``, ``"GR6J"`` or their CemaNeige variants.
+        params : sequence of float
+            Model parameters, see :func:`param_names`.
+        method : str
+            ``"EnKF"`` (ensemble Kalman filter), ``"PF"`` (particle filter)
+            or ``"none"`` (open loop).
+        period : (str, str), optional
+            Assimilation period.
+        nb_mbr : int
+            Ensemble size.
+        state_enkf : sequence of str, optional
+            State variables updated by the EnKF, among ``"Prod"``,
+            ``"Rout"``, ``"UH1"``, ``"UH2"`` (``"UH1"`` does not exist in
+            GR5J). Defaults to all of them.
+        state_pert : sequence of str, optional
+            State variables perturbed after each update, which keeps the
+            ensemble spread; for the EnKF, a subset of ``state_enkf``.
+        perturb : bool
+            Also perturb the precipitation and potential evapotranspiration
+            inputs (an :class:`grsuite.InputsPert` ensemble built with the
+            same ``nb_mbr`` and ``seed``).
+        seed : int, optional
+            Random seed; as in airGRdatassim, the generator is reset at
+            every time step with ``seed + i`` (1-based).
+
+        Returns
+        -------
+        Assimilation
+        """
+        if self.obs_discharge is None:
+            raise ValueError("assimilation needs 'obs_discharge'")
+        if model not in DA_MODELS:
+            raise ValueError("data assimilation is available for %s"
+                             % ", ".join(DA_MODELS))
+        if method == "EnKF" and state_enkf is None:
+            state_enkf = list(_state_names(model))
+        inputs = self._inputs(model)
+        index = self.period_index(period)
+        inputs_pert = None
+        if perturb:
+            inputs_pert = InputsPert(
+                model, self.dates, precip=self.precip,
+                pot_evap=self.pot_evap, temp_mean=self.temperature,
+                z_inputs=self.elevation, hypso_data=self.hypsometry,
+                n_layers=self.n_layers, nb_mbr=nb_mbr, seed=seed)
+        outputs = run_model_da(inputs, index, model,
+                               np.asarray(params, dtype=float),
+                               inputs_pert=inputs_pert,
+                               qobs=self.obs_discharge, da_method=method,
+                               nb_mbr=nb_mbr, state_enkf=state_enkf,
+                               state_pert=state_pert, seed=seed)
+        return Assimilation(self, model, np.asarray(params, dtype=float),
+                            method, index, outputs)
+
 
 class Simulation:
     """The result of one model run, with the usual scores attached."""
@@ -540,3 +613,85 @@ class CalibratedModel:
         name = self.criterion if isinstance(self.criterion, str) else "composite"
         return ("CalibratedModel(%s, %s=%.4f, params=%s)"
                 % (self.model, name, self.score, np.round(self.params, 3)))
+
+
+class Assimilation:
+    """The result of a data assimilation run: ensemble trajectories.
+
+    Wraps the raw :func:`grsuite.run_model_da` output (available as
+    ``outputs``) with the catchment context.
+    """
+
+    def __init__(self, catchment, model, params, method, index, outputs):
+        self.catchment = catchment
+        self.model = model
+        self.params = params
+        self.method = method
+        self.index = index
+        self.outputs = outputs
+
+    @property
+    def dates(self):
+        return self.outputs["DatesR"]
+
+    @property
+    def qobs(self):
+        """Observed discharge over the assimilation period."""
+        return self.catchment.obs_discharge[self.index]
+
+    @property
+    def qsim_ens(self):
+        """Ensemble discharge, (time, member) [mm per time step]."""
+        return self.outputs["QsimEns"]
+
+    def qsim_median(self):
+        """Median of the ensemble at each time step."""
+        return np.median(self.qsim_ens, axis=1)
+
+    def qsim_mean(self):
+        """Mean of the ensemble at each time step."""
+        return np.mean(self.qsim_ens, axis=1)
+
+    def states(self, name, analysis=True):
+        """Ensemble trajectories of a state variable, (time, member).
+
+        ``name`` is one of the outputs' ``StateNames`` (``"Prod"``,
+        ``"Rout"``, ``"UH1"``, ``"UH2"``); ``analysis=False`` gives the
+        background (before the update) instead of the analysis.
+        """
+        key = "EnsStateA" if analysis else "EnsStateBkg"
+        k = list(self.outputs["StateNames"]).index(name)
+        return self.outputs[key][:, :, k]
+
+    def to_dataframe(self):
+        """Observed discharge, ensemble median and members as a DataFrame."""
+        import pandas as pd
+        frame = pd.DataFrame({"Qobs": self.qobs,
+                              "Qsim_median": self.qsim_median()},
+                             index=pd.DatetimeIndex(self.dates, name="date"))
+        for m in range(self.qsim_ens.shape[1]):
+            frame["Mbr_%i" % (m + 1)] = self.qsim_ens[:, m]
+        return frame
+
+    def __repr__(self):
+        return ("Assimilation(%s, %s, %i steps, %i members)"
+                % (self.model, self.method, self.qsim_ens.shape[0],
+                   self.qsim_ens.shape[1]))
+
+    def plot(self, ax=None, log=False, title=None):
+        """Plot the observed hydrograph against the ensemble (matplotlib)."""
+        import matplotlib.pyplot as plt
+        if ax is None:
+            _, ax = plt.subplots(figsize=(11, 4))
+        ax.plot(self.dates, self.qobs, lw=1.1, color="#3c4c54",
+                label="observed")
+        ax.plot(self.dates, self.qsim_ens, lw=0.4, color="#9ecae1")
+        ax.plot(self.dates, self.qsim_median(), lw=1.2, color="#0a7ea4",
+                label="%s ensemble median (%s)" % (self.model, self.method))
+        if log:
+            ax.set_yscale("log")
+        ax.set_ylabel("discharge [mm/step]")
+        ax.legend(frameon=False, ncol=2)
+        ax.set_title(title or (self.catchment.name or "") or None)
+        ax.spines[["top", "right"]].set_visible(False)
+        return ax

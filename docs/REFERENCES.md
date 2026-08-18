@@ -221,7 +221,33 @@ doi:[10.1029/2018WR024266](https://doi.org/10.1029/2018WR024266)
 
 ---
 
-## 9. Data used for validation
+## 9. Data assimilation
+
+The data assimilation component (`InputsPert`, `run_model_da`,
+`Catchment.assimilate`) re-implements airGRdatassim 0.1.4; the EnKF and
+particle-filter schemes it realises, and the state-perturbation scheme, are
+the work of their authors.
+
+**Piazzi, G., Thirel, G., Perrin, C., Delaigue, O.** (2021). Sequential data
+assimilation for streamflow forecasting: assessing the sensitivity to
+uncertainties and updated variables of a conceptual hydrological model at
+basin scale. *Water Resources Research*, 57, e2020WR028390.
+doi:[10.1029/2020WR028390](https://doi.org/10.1029/2020WR028390)
+
+**Salamon, P., Feyen, L.** (2009). Assessing parameter, precipitation, and
+predictive uncertainty in a distributed hydrological model using sequential
+data assimilation with the particle filter. *Journal of Hydrology*,
+376(3–4), 428–442.
+doi:[10.1016/j.jhydrol.2009.07.051](https://doi.org/10.1016/j.jhydrol.2009.07.051)
+
+**Piazzi, G., Delaigue, O.** (2025). airGRdatassim: Ensemble-Based Data
+Assimilation with GR Hydrological Models. R package version 0.1.4, INRAE,
+HYCAR Research Unit, Antony, France.
+doi:[10.32614/CRAN.package.airGRdatassim](https://doi.org/10.32614/CRAN.package.airGRdatassim)
+
+---
+
+## 10. Data used for validation
 
 **Delaigue, O., Brigode, P., Andréassian, V., Perrin, C., Etchevers, P.,
 Soubeyroux, J.-M., Janet, B., Addor, N.** (2024). CAMELS-FR dataset: a

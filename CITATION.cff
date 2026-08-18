@@ -10,8 +10,8 @@ authors:
     given-names: Najim
     email: najimbouhafa@gmail.com
 license: GPL-2.0-or-later
-version: 1.0.0
-date-released: "2026-08-15"
+version: 1.1.0
+date-released: "2026-08-19"
 repository-code: "https://github.com/Najim33/GRsuite"
 abstract: >-
   An unofficial, independent Python implementation of the GR suite of lumped
@@ -68,6 +68,38 @@ references:
     version: "1.7.9"
     doi: "10.15454/EX11NA"
     url: "https://cran.r-project.org/package=airGR"
+    notes: "INRAE, HYCAR Research Unit, Antony, France. GPL-2."
+
+  - type: article
+    title: >-
+      Sequential data assimilation for streamflow forecasting: assessing the
+      sensitivity to uncertainties and updated variables of a conceptual
+      hydrological model at basin scale
+    authors:
+      - family-names: Piazzi
+        given-names: Gaia
+      - family-names: Thirel
+        given-names: Guillaume
+      - family-names: Perrin
+        given-names: Charles
+      - family-names: Delaigue
+        given-names: Olivier
+    journal: "Water Resources Research"
+    volume: 57
+    year: 2021
+    doi: "10.1029/2020WR028390"
+    notes: "The EnKF and particle-filter data assimilation schemes."
+
+  - type: software
+    title: "airGRdatassim: Ensemble-Based Data Assimilation with GR Hydrological Models"
+    authors:
+      - family-names: Piazzi
+        given-names: Gaia
+      - family-names: Delaigue
+        given-names: Olivier
+    version: "0.1.4"
+    doi: "10.32614/CRAN.package.airGRdatassim"
+    url: "https://cran.r-project.org/package=airGRdatassim"
     notes: "INRAE, HYCAR Research Unit, Antony, France. GPL-2."
 
   - type: article
